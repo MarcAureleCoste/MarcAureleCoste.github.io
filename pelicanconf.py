@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Marc-Aurele Coste'
 SITENAME = 'Cyclopy'
-SITEURL = 'https://marcaurelecoste.github.io/cyclopy'
+SITEURL = ''
 
 PATH = 'content'
 STATIC_PATHS = ['/static']
