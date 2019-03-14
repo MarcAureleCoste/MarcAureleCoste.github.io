@@ -4,12 +4,16 @@
     {% block head %}
         <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Author -->
         <meta name="author" content="{{ AUTHOR }}">
 
         <!-- Foundation CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous"> -->
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
         <!-- FontAwesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -55,101 +59,80 @@
     {% endblock head %}
 </head>
 
-<body id="index" class="home">
+<body id="index" class="d-flex flex-column h-100">
 
-    <div class="grid-y medium-grid-frame">
-        <div class="cell shrink header medium-cell-block-container">
-            <!-- Topbar -->
-            <div class="top-bar">
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="top-bar-left">
-                    <ul class="dropdown menu" data-dropdown-menu>
-                        <!-- <li class="menu-text">{{ SITENAME }}</li> -->
-                        <li>
-                            <a class="topbar-title" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    
+                    {% for title, link in MENUITEMS %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ link }}">{{ title }}</a>
                         </li>
+                    {% endfor %}
 
-                        {% for title, link in MENUITEMS %}
-                        <li><a href="{{ link }}">{{ title }}</a></li>
-                        {% endfor %}
-
-                        {% if DISPLAY_PAGES_ON_MENU %}
+                    {% if DISPLAY_PAGES_ON_MENU %}
                         {% for p in pages %}
-                        <li{% if p == page %} class="active" {% endif %}>
-                            <a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+                            <li class="nav-item" {% if p == page %} class="active" {% endif %}>
+                                <a class="nav-link" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
                             </li>
-                            {% endfor %}
-                            {% endif %}
-
-                            {% if DISPLAY_CATEGORIES_ON_MENU %}
-                            <li class="has-submenu">
-                                <a href="#0">Catégories</a>
-                                <ul class="submenu menu vertical" data-submenu>
-                                    {% for cat, null in categories %}
-                                    <li{% if cat == category %} class="active" {% endif %}>
-                                        <a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
-                            </li>
-                            {% endfor %}
-                    </ul>
-                    </li>
+                        {% endfor %}
                     {% endif %}
-                    </ul>
-                </div>
 
-                <div class="top-bar-right">
-                </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">Catégories</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            {% for cat, null in categories %}
+                                <a class="dropdown-item" href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+
+                </ul>
             </div>
+
+        </nav>
+    </header>
+
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
         </div>
+    </main>
 
-        <div class="cell medium-auto medium-cell-block-container">
-            <div class="cell medium-8 medium-cell-block-y">
-                <div class="grid-x grid-padding-x">
-                <div class="grid-container">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-                </div>
-            </div>
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <!-- <span class="text-muted">Place sticky footer content here.</span> -->
+            <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of
+                <a href="http://python.org">Python</a>.
+            </address>
         </div>
-
-        <div class="cell shrink footer">
-            <footer class="main-footer">
-                <div class="grid-container">
-                    <div class="grid-x grid-padding-x">
-                        
-                        <div class="cell auto">
-                            
-                        </div>
-
-                        <div class="cell auto">
-                            <address id="about" class="vcard body">
-                                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of
-                                <a href="http://python.org">Python</a>.
-                            </address>
-                        </div>
-                        
-                        <div class="cell auto">
-                            <!-- <div class="grid-y">
-                                <div class="cell auto">
-                                    <a href="www.linkedin.com/in/marc-aurèle-c-5501b2a5">
-                                        <i class="footer-social fab fa-linkedin"></i>
-                                    </a>
-                                </div>
-                            </div> -->
-                        </div>
-
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
+    </footer>
 
     <!-- JQuery -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- JQuery -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script> -->
     <!-- Foundation JS -->
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script>
-    <script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script> -->
+    <!-- <script>
         $(document).foundation();
-    </script>
+    </script> -->
 </body>
 </html>

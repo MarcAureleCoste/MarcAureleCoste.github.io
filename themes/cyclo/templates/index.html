@@ -5,32 +5,38 @@
     {% endblock %}
 
     {% for article in articles_page.object_list %}
+        <article class="hentry">
+            <header>
+                <h2 class="entry-title">
+                    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}
+                    </a>
+                </h2>
+            </header>
+            
+            <footer class="post-info">
+                <time class="published" datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }} </time>
+            </footer><!-- /.post-info -->
+            <div class="entry-content"> {{ article.summary }} </div><!-- /.entry-content -->
 
-        <div class="cell">
-            <article class="hentry">
-                <header>
-                    <h2 class="entry-title">
-                        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}
-                        </a>
-                    </h2>
-                </header>
-                
-                <footer class="post-info">
-                    <time class="published" datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }} </time>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> {{ article.summary }} </div><!-- /.entry-content -->
+            <!-- <div class="grid-x">
+                {% for tag in article.tags %}
+                    <div class="cell shrink">
+                        <a class="clear button secondary" href="{{ tag.url }}">{{ tag.name }}</a>
+                    </div>
+                {% endfor %}
+            </div> -->
 
-                <div class="grid-x">
-                    {% for tag in article.tags %}
-                        <div class="cell shrink">
-                            <a class="clear button secondary" href="{{ tag.url }}">{{ tag.name }}</a>
-                        </div>
-                    {% endfor %}
-                </div>
+            <div>
+                {% for tag in article.tags %}
+                    <a href="{{ tag.url }}" class="badge badge-pill badge-dark">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
 
-                <a href="{{ SITEURL }}/{{ article.url }}" class="button primary">Lire la suite ...</a>
-            </article>
-        </div>
+            <br>
+
+            <a href="{{ SITEURL }}/{{ article.url }}" class="btn btn-primary" role="button">Lire la suite ...</a>
+
+        </article>
     {% endfor %}
 
     {% if articles_page.has_other_pages() %}

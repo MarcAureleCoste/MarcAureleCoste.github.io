@@ -97,7 +97,7 @@ que l'on ajoute à :red:`development.py` et :red:`production.py`.
         }
     }
 
-Pour finir nous ajoutons **rest_framework** dans la liste des **INSTALLED_APPS** dans note fichier :red:`common.py`. On peut maintenant lancer notre application et verifier qu'il n'y a aucune erreur.
+Pour finir nous ajoutons **rest_framework** dans la liste des **INSTALLED_APPS** dans notre fichier :red:`common.py`. On peut maintenant lancer notre application et vérifier qu'il n'y a aucune erreur.
 
 .. code-block:: sh
 
@@ -112,22 +112,22 @@ Rendez-vous sur `localhost:8000 <http://localhost:8000>`_ et vous devriez voir u
     :alt: install success
     :align: center
 
-Les sources pour le mise en place du project sont disponibles `ici <https://github.com/MarcAureleCoste/DjangoRestApiTutorial/tree/S01-installation>`_, branche **S01-installation**.
+Les sources pour la mise en place du project sont disponibles `ici <https://github.com/MarcAureleCoste/DjangoRestApiTutorial/tree/S01-installation>`_.
 
 Création de l'API
 =================
 
 .. code-block:: sh
 
-    # Je crée un dossier dans lequel je mettrais toutes mes applications.
-    # Vous pouvez, si vous préférez, tout mettre à la racine dans ce cas la sautez les 3 lignes qui suivent.
+    # Je crée un dossier dans lequel je mettrai toutes mes applications.
+    # Vous pouvez, si vous préférez, tout mettre à la racine. Dans ce cas là sautez les 3 lignes qui suivent.
     django-admin startapp apps
     cd apps
     rm -r migrations admin.py models.py tests.py views.py
     
     django-admin startapp todo
 
-Dans le fichier :red:`models.py` on va définir note modèle de Todo.
+Dans le fichier :red:`models.py` on va définir notre modèle de Todo.
 
 .. code-block:: python
 
@@ -152,7 +152,7 @@ On ajoute notre nouvelle application dans les **INSTALLED_APPS** du fichier :red
     ]
     # ...
 
-On peut maintenant créer notre première migration pour notre application *todo* et appliquer cette migration (cela appliquera également les migrations que nous n'avons pas faite dans la première partie).
+On peut maintenant créer notre première migration pour notre application *todo* et appliquer cette migration (cela appliquera également les migrations que nous n'avons pas faites dans la première partie).
 
 .. code-block:: sh
 
@@ -214,7 +214,7 @@ Il nous reste trois étapes pour finir la création de notre API.
     TODO_ROUTER = DefaultRouter()
     TODO_ROUTER.register(r'', TodoViewset)
 
-Voilà pour finir nous importons ce router dans le fichier :red:`urls.py` qui se situe dans le dossier **DjangoRestApiTutorial** qui est notre fichier principal d'url.
+Voilà, pour finir, nous importons ce router dans le fichier :red:`urls.py` qui se situe dans le dossier **DjangoRestApiTutorial** qui est notre fichier principal d'url.
 
 .. code-block:: python
 
@@ -241,6 +241,8 @@ Vous pouvez maintenant vous rendre sur `localhost:8000/api/todo <http://localhos
 :GET /api/todo/<id>: Récupération du todo avec l'id *<id>*
 :PUT /api/todo/<id>: Update du todo avec l'id *<id>*
 :DELETE /api/todo/<id>: Suppression du todo avec l'id *<id>*
+
+Les sources : `GitHub <https://github.com/MarcAureleCoste/DjangoRestApiTutorial/tree/S02-simpleapi>`_.
 
 -----
 

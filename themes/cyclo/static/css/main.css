@@ -8,6 +8,26 @@ html, body {
     height: 100%;
 }
 
+main > .container {
+    padding: 60px 15px 0;
+}
+
+.footer {
+    background-color: #333333;
+    color: white;
+    padding: 1rem;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+
+
 /* ********** TOPBAR ********** */
 .topbar-title {
     font-weight: bold;
@@ -67,6 +87,12 @@ html, body {
 
 .vcard.body {
     text-align: center;
+}
+
+
+.responsive-images {
+    width: 100%;
+    height: auto;
 }
 
 /***** Global *****/
@@ -182,10 +208,10 @@ table {margin: .5em auto 1.5em auto; width: 98%;}
     tfoot td {}
     
 /* HTML5 tags */
-header, section, footer,
+/* header, section, footer,
 aside, nav, article, figure {
     display: block;
-}
+} */
 
 /***** Sections *****/
 /* Blog */

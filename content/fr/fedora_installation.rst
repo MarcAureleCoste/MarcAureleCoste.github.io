@@ -29,7 +29,7 @@ On télécharge l'ISO que l'on prendra en version *netinstall*. Pour la créatio
 
     dd if=path/to/iso of=/path/to/device.
 
-Il existe également des outils dédiés pour faire ce genre de chose avec une interface graphique.
+Il existe également des outils dédiés pour faire la même chose avec une interface graphique.
 
 :Windows:
     `rufus <https://rufus.ie/>`_ | `unetbootin <https://unetbootin.github.io/>`_
@@ -41,45 +41,37 @@ Il existe également des outils dédiés pour faire ce genre de chose avec une i
 Installation
 ============
 
-Bon ici rien de compliqué. On boot sur la clé et on suit les étapes.
+Bon ici, rien de compliqué. On boot sur la clé et on suit les étapes.
 
 .. note:: On est sur une version *netinstall* donc il nous faut une connexion internet Wi-Fi ou filaire.
 
 .. image:: {static}/static/images/fedora_installation/choose_language.png
-    :width: 1128 px
-    :height: 783 px
-    :scale: 65 %
     :alt: choose language screen
     :align: center
+    :class: responsive-images
 
 On choisit la langue, par défaut je me mets toujours en anglais mais après c'est une question de préférence. Ne pas oublier de choisir son clavier (en haut à droite).
 
 Ici on arrive sur le menu principal de l'installation.
 
 .. image:: {static}/static/images/fedora_installation/main.png
-    :width: 1128 px
-    :height: 783 px
-    :scale: 65 %
     :alt: main screen
     :align: center
+    :class: responsive-images
 
 On choisit où on veut installer la distribution (Installation Destination)
 
 .. image:: {static}/static/images/fedora_installation/select_drive.png
-    :width: 1133 px
-    :height: 467 px
-    :scale: 65 %
     :alt: select installation destination screen
     :align: center
+    :class: responsive-images
 
 Pour finir on choisit le type d'installation (Sofware Selection). Ici on prend la *minimal install* et c'est tout.
 
 .. image:: {static}/static/images/fedora_installation/software_selection.png
-    :width: 1132 px
-    :height: 327 px
-    :scale: 65 %
     :alt: select software screen
     :align: center
+    :class: responsive-images
 
 .. note:: Pour les personnes qui sont en Wi-Fi je conseille aussi de choisir FIXME sinon vous risquez d'avoir des problèmes pour la suite car les drivers ne seront probablement pas installés et le support du Wi-Fi pour **NetworkManager** ne sera pas présent.
 
@@ -121,7 +113,7 @@ Pour cela on reboot à nouveau sur sa clé USB et on procède de la manière sui
 Configuration
 =============
 
-Fedora est installé !
+Fedora est installée !
 
 Il faut maintenant régler quelques petits détails afin d'avoir une distribution prête à l'emploi. Il nous faut tout d'abord installer X ainsi qu'un window manager. Pour ma part ce sera QTile_.
 
@@ -142,7 +134,7 @@ On utilise DNF pour installer tout ce dont nous avons besoin.
 :rxvt-unicode-256color:
     Notre terminal.
 :w3m:
-    Notre navigateur internet pour le moment. (Facultatif on peut aussi installer directement Firefox si on veut moi je préfère passer par les archives tar fourni par mozilla.)
+    Notre navigateur internet pour le moment. (Facultatif: on peut aussi installer directement Firefox si on veut. Moi, je préfère passer par les archives tar fournies par Mozilla.)
 :feh:
     Va nous servir à définir une image en background.
 :compton:
@@ -151,7 +143,7 @@ On utilise DNF pour installer tout ce dont nous avons besoin.
 RPMs fusion
 -----------
 
-Pour avoir acces à une liste plus complète de packets on installe les repos `RPM fusion <https://rpmfusion.org/>`_ *free* et *non free*
+Pour avoir accés à une liste plus complète de packets on installe les repos `RPM fusion <https://rpmfusion.org/>`_ *free* et *non free*
 
 .. code-block:: sh
 
@@ -163,13 +155,13 @@ Finitions
 On commence par recupérer les fichiers `.xinitrc <https://gist.github.com/MarcAureleCoste/62094177c8f1c0239077b8cc541b427a>`_ et `.Xresources <https://gist.github.com/MarcAureleCoste/2472133ba1ddcb3406dc972fe291a5f1>`_ que l'on copie dans son **home**.
 
 :.xinitrc:
-    Sert lorsqu'on lance la session X pour paramétrer les programmes aui doivent être exécutés et quel window manager lancer.
+    Sert lorsqu'on lance la session X pour paramétrer les programmes qui doivent être exécutés et quel window manager lancer.
 :.Xresources:
     Permet de configurer certaines applications et notamment rxvt-unicode-256color que nous avons installé un peu avant.
 
 Pour finir on récupère le `fichier de configuration <https://gist.github.com/MarcAureleCoste/02c18d3bad74c85b5bcd3e415f2e01a9>`_ de QTile et on le place dans le dossier suivant *~/.config/qtile/*.
 
-On peut maintenant demarer notre sessions X avec la commande
+On peut maintenant démarrer notre sessions X avec la commande
 
 .. code-block:: sh
 
@@ -177,4 +169,4 @@ On peut maintenant demarer notre sessions X avec la commande
 
 .. note:: Si vous n'avez pas encore le fichier **.xinitrc** dans votre *home* il faut passer en argument de *startx* le path absolue vers l'éxécutable de votre window manager (pour qtile */usr/bin/qtile*).
 
-Voilà l'installation de Fedora est finie et nous avons une installation minimale parfaitement fonctionnelle.
+Voilà, l'installation de Fedora est finie et nous avons une installation minimale parfaitement fonctionnelle.

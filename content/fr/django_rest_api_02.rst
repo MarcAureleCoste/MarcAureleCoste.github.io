@@ -73,21 +73,19 @@ On ajoute ensuite cette classe dans notre viewset.
         ...
         filter_class = TodoFilter
 
-Voilà on peut se rendre sur `locahost:8000/api/todo/ <http://locahost:8000/api/todo/>`_ et voir en haut à droite un nouveau bouton **Filters**
+Voilà, on peut se rendre sur `locahost:8000/api/todo/ <http://locahost:8000/api/todo/>`_ et voir en haut à droite un nouveau bouton **Filters**
 
 .. image:: {static}/static/images/django_rest_api/filters_button.png
-    :width: 804 px
-    :height: 184 px
-    :scale: 90 %
     :alt: bouton Filters
     :align: center
+    :class: responsive-images
 
 On peut maintenant filtrer nos résultats.
 
 Filtrage avec des booléens
 ==========================
 
-Nous avons dans la liste des champs (fields) :red:`finished` qui est de type booléen. Le problème est que l'URL final ressemble à ceci lorsque l'on essaie de filtrer sur ce champ.
+Nous avons dans la liste des champs (fields) :red:`finished` qui est de type booléen. Le problème est que l'URL finale ressemble à ceci lorsque l'on essaie de filtrer sur ce champ.
 
     127.0.0.1:8000/api/todo/?finished=2
 
@@ -164,7 +162,7 @@ On va modifier légèrement notre classe de filtre afin de permettre ce type de 
                 'finished': []
             }
 
-Dans cet exemple nous précisons que nous cherchons à faire un test d'inclusion pour le **title** et pour la **description**.
+Dans cet exemple, nous précisons que nous cherchons à faire un test d'inclusion pour le **title** et pour la **description**.
 
 Voici quelques possibilités de tests offertes par Django (la liste complète se trouve `ici <https://docs.djangoproject.com/fr/2.1/ref/models/querysets/#field-lookups>`_)
 
@@ -192,7 +190,9 @@ Voici quelques possibilités de tests offertes par Django (la liste complète se
 :blue:`endswith`
     Se termine par (sensible à la casse).
 
-Voilà c'est tout pour la partie filtrage. Cela vous permettra d'obtenir une API assez flexible sur les données retournées et vous évitera un traitement côté client.
+Voilà, c'est tout pour la partie filtrage. Cela vous permettra d'obtenir une API assez flexible sur les données retournées et vous évitera un traitement côté client.
+
+Les sources : `GitHub <https://github.com/MarcAureleCoste/DjangoRestApiTutorial/tree/S03-filters>`_.
 
 -----
 

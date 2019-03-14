@@ -7,13 +7,16 @@ SITENAME = 'Cyclopy'
 SITEURL = ''
 
 PATH = 'content'
-STATIC_PATHS = ['/static']
+STATIC_PATHS = ['/static', 'extra']
+EXTRA_PATH_METADATA = {
+    'extra/favicon.ico': {'path': 'favicon.ico'}
+}
 
 TIMEZONE = 'Europe/Paris'
 
 DEFAULT_LANG = 'fr'
 
-THEME = '/home/cmarc/workspace/cyclopy/themes/cyclo'
+THEME = '/home/cmarc/workspace/blog/MarcAureleCoste.github.io/themes/cyclo'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
