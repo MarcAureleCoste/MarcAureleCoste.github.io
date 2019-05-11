@@ -1,23 +1,17 @@
-.red {
-    color: red;
-}
+.black {color: #222222;}
+.red {color: #e84f4f;}
+.green {color: #b7ce42;}
+.yellow {color: #fea63c;}
+.blue {color: #66aabb;}
+.magenta {color: #b7416e;}
+.cyan {color: #6d878d;}
+.grey {color: #dddddd;}
 
-.dred {
-    color: darkred;
-}
-
-.blue {
-    color: blue;
-}
-
-.dblue {
-    color: darkblue;
-}
-
-.green {
-    color: green;
-}
-
-.dgreen {
-    color: darkgreen;
-}
+.bblack {color: #666666;}
+.bred {color: #d23d3d;}
+.bgreen {color: #bde077;}
+.byellow {color: #ffe863;}
+.bblue {color: #aaccbb;}
+.bmagenta {color: #e16a98;}
+.bcyan {color: #42717b;}
+.bgrey {color: #cccccc;}

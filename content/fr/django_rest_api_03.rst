@@ -1,8 +1,7 @@
 Django REST API #3 : Authentification / Permissions
 ###################################################
 
-:date: 2019-02-28 20:35
-:modified: 2019-02-28 20:35
+:date: 2019-05-11 22:00
 :tags: Python, Django, REST API
 :category: Développement
 :slug: django-rest-api-03
@@ -18,7 +17,7 @@ Mais un fondamental est manquant, la gestion des utilisateurs, sauf si bien sûr
 Settings
 ========
 
-On commence par changer nos settings. On ajoute l'application "rest_framework.authtoken" qui permettra l'authentification via un token (ce sera utile en production) et dans les settings de DRF nous allons ajouter une restriction : les utilisateurs doivent être authentifiés pour pouvoir utiliser notre API.
+On commence par changer nos settings. On ajoute l'application "rest_framework.authtoken" qui permettra l'authentification via un token (ce sera utile en production) et dans les settings de DRF nous ajoutons une restriction : **les utilisateurs doivent être authentifiés pour pouvoir utiliser notre API**.
 
 .. code-block:: python
 
@@ -55,7 +54,7 @@ Dans le fichier de settings pour le développement nous ajoutons ceci pour autor
 Création du modèle TodoUser
 ===========================
 
-Nous allons créer un utilisateur pour notre application. Django fournit un modèle User de base mais nous allons wrapper ce modèle avec notre propre classe et en utilisant une liaison OneToOne. On peut voir cet "utilisateur" plus comme un profile. Cela nous offrira plus de flexibilité si nous voulons ajouter des informations à notre utilisateur dans le futur.
+Nous allons créer un utilisateur pour notre application. Django fournit un modèle User de base mais nous allons wrapper ce modèle avec notre propre classe et en utilisant une liaison **OneToOne**. On peut voir cet "utilisateur" plus comme un profile. Cela nous offrira également plus de flexibilité si nous voulons ajouter des informations à notre utilisateur dans le futur.
 
 On va dans notre fichier :red:`models.py`
 
@@ -75,12 +74,11 @@ On va dans notre fichier :red:`models.py`
         def __str__(self):
             return self.d_user.username
 
-Afin de ne pas être limité par le modèle user fourni par Django nous allons commencer par créer le nôtre.
 
-Creation d'un todo: assignation du propriétaire
-===============================================
+Création d'une tâche: assignation du propriétaire
+=================================================
 
-La création de nos Todo est maintenant légèrement modifiée. En plus des informations **title**, **description** et **finished** il nous faut maintenant définir le **owner**. Pour cela on va se baser sur l'utilisateur qui envoie la requête étant donnée que maintenant pour utiliser notre API il faut être authentifié. Pour faire cela nous allons overwrite la méthode create du serializer.
+La création de nos tâches doit maintenant être modifiée. En plus des informations **title**, **description** et **finished** il nous faut maintenant définir le **owner**. Pour cela on va se baser sur l'utilisateur qui envoie la requête étant donnée que maintenant pour utiliser notre API il faut être authentifié. Nous allons overwrite la méthode create du serializer pour creer une tâche avec une liaison vers le user qui a envoyé la requête.
 
 .. code-block:: python
 
@@ -98,7 +96,7 @@ La création de nos Todo est maintenant légèrement modifiée. En plus des info
 Filter les résultats
 ====================
 
-Tout comme la création, la récupération des résultats doit être modifiée. En effet je ne veux voir que les todo que j'ai créé et pas ceux des autres. Il faut donc filtrer les résultats qui vont être retournés. C'est dans le viewset que l'on a défini la queryset c'est donc dans cette classe que nous allons agir pour filtrer les résultats.
+Tout comme la création, la récupération des résultats doit être modifiée. En effet je ne veux voir que les tâches que j'ai créé et pas celles des autres. Il faut donc filtrer les résultats qui vont être retournés. C'est dans le viewset que l'on a défini la queryset et c'est donc dans cette classe que nous allons agir pour filtrer les résultats.
 
 .. code-block:: python
 

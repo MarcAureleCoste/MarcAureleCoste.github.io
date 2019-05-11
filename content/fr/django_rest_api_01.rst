@@ -106,11 +106,9 @@ Pour finir nous ajoutons **rest_framework** dans la liste des **INSTALLED_APPS**
 Rendez-vous sur `localhost:8000 <http://localhost:8000>`_ et vous devriez voir une page ressemblant à l'image ci-dessous.
 
 .. image:: {static}/static/images/django_rest_api/install_success.png
-    :width: 2373 px
-    :height: 1215 px
-    :scale: 40 %
     :alt: install success
     :align: center
+    :class: responsive-images
 
 Les sources pour la mise en place du project sont disponibles `ici <https://github.com/MarcAureleCoste/DjangoRestApiTutorial/tree/S01-installation>`_.
 
