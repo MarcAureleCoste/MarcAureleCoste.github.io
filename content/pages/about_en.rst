@@ -4,6 +4,7 @@ About
 :slug: about
 :lang: en
 :translation: true
+:status: draft
 
 .. _PyPy: https://pypy.org/
 .. _Stackless: https://github.com/stackless-dev/stackless/wiki
