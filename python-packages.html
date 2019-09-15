@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+            <title>Cyclopy - Packager ses applications en python</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Author -->
+        <meta name="author" content="Marc-Aurele Coste">
+
+        <!-- Foundation CSS -->
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous"> -->
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- FontAwesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!-- IE -->
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="/css/ie.css"/>
+                <script src="/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="/css/ie6.css"/><![endif]-->
+
+
+
+
+
+
+        <meta name="tags" content="Python" />
+        <meta name="tags" content="Packaging" />
+
+</head>
+
+<body id="index" class="d-flex flex-column h-100">
+
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="/">Cyclopy</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">Catégories</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                <a class="dropdown-item" href="/category/developpement.html">Développement</a>
+                                <a class="dropdown-item" href="/category/linux.html">Linux</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+
+<article class="hentry">
+    <header>
+        <h2 class="entry-title">
+            <a href="/python-packages.html" rel="bookmark" title="Permalink to Packager ses applications en python">
+                Packager ses applications en python
+            </a>
+        </h2>
+
+        
+    </header>
+
+    <footer class="post-info">
+        <time class="published" datetime="2019-09-15T19:15:00+02:00">
+            Sun 15 September 2019
+        </time>
+
+
+        <div class="category">
+            Category: <a href="/category/developpement.html">Développement</a>
+        </div>
+
+        <div class="tags">
+            Tags:
+            <a href="/tag/python.html">Python</a>
+            <a href="/tag/packaging.html">Packaging</a>
+        </div>
+    </footer><!-- /.post-info -->
+
+    <div class="entry-content">
+        <p>Lorsque l'on se lance dans le développement en général la partie packaging n'est pas une priorité,
+c'est même souvent la partie que l'on garde pour la fin. C'est malheureusement une erreur et python
+n'échappe pas à la règle. Nous verrons dans cet article les nombreux avantages que peut nous apporter
+le fichier <span class="red">setup.py</span> durant pour le développement.</p>
+<div class="section" id="un-package-basic">
+<h2>Un package basic</h2>
+<p>Commençons en douceur avec un package des plus basic. Une fois installé, ce package nous permettra
+d'importer la fonction que l'on aura définie et on pourra l'utiliser facilement dans d'autres projets.</p>
+<p>Pour vous aider, vous trouverez le code de cette étape sur GitHub
+<a class="reference external" href="https://github.com/MarcAureleCoste/packages/tree/step-01">step-01</a>.</p>
+<p>La pièce maitresse dans la création d'un paquet python, comme expliqué en introduction, c'est le
+<span class="red">setup.py</span>, et voilà à quoi cela peut ressembler.</p>
+<div class="highlight"><pre><span></span><span class="c1"># setup.py</span>
+<span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
+
+<span class="n">NAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;simple_package&#39;</span>
+<span class="n">VERSION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
+<span class="n">DESCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;A simple python package.&#39;</span>
+
+<span class="n">REQUIRES</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">NAME</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="n">VERSION</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="n">DESCRIPTION</span><span class="p">,</span>
+
+    <span class="n">zip_safe</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+
+    <span class="n">install_requires</span><span class="o">=</span><span class="n">REQUIRES</span><span class="p">,</span>
+
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">),</span>
+    <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="s1">&#39;src&#39;</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+<p>Ce n’est finalement que l’appel à une fonction setup avec les bons paramètres rien de plus. Ici
+nous passons à cette fonction le nom du package que nous voulons créer, sa version, une description
+et ses requirements. Nous expliquons aussi à cette fonction où trouver les sources de notre
+package.</p>
+<p>Notre projet est structuré de la manière suivante :</p>
+<pre class="literal-block">
+root/
+|-- src/
+|   |-- simple_package/
+|       |-- __init__.py
+|-- README.md
+|-- setup.py
+</pre>
+<p>Nous expliquons donc à la fonction setup de prendre tous les packages qu’elle trouvera dans le
+dossier src (packages=find_packages('src')) et nous lui précisons aussi que le dossier qui contient
+les packages est src (package_dir={'': 'src'}).</p>
+<p>Ok c'est super tout ça mais on en fait quoi de ce <span class="red">setup.py</span> ? Et bien vous pouvez maintenant
+créer votre package, l'installer et même le mettre sur <a class="reference external" href="https://pypi.org/">pypi</a> (le repository
+des packages python). Nous verrons cette dernière étape à la fin de l’article.</p>
+<div class="highlight"><pre><span></span><span class="c1"># build</span>
+python setup.py build
+
+<span class="c1"># build distribution package</span>
+python setup.py sdist
+
+<span class="c1"># installation</span>
+pip install .
+
+<span class="c1"># installation dev mode</span>
+pip install -e .
+</pre></div>
+</div>
+<div class="section" id="gestion-des-requirements">
+<h2>Gestion des requirements</h2>
+<p>Maintenant, voyons comment gérer facilement les dépendances. Les fichiers requirements*.txt peuvent
+sembler assez limités, surtout dans le cas où l'on veut séparer ses requirements de
+<strong>developement</strong>. Même s'ils sont limités, nous n'allons pas supprimer #####nos fichiers de
+requirements mais plutôt essayer de les intégrer dans notre <span class="red">setup.py</span>.</p>
+<p>Le fichier de setup est un fichier python comme un autre et par conséquent on peut faire tout ce que
+le langage nous autorise, notamment lire un fichier pour en extraire ce que l'on veut (dans notre
+cas ce sera les requirements)</p>
+<p>On ajoute les éléments suivants pour permettre la gestion des dépendances</p>
+<div class="highlight"><pre><span></span><span class="c1"># setup.py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1"># ...</span>
+
+<span class="k">def</span> <span class="nf">_get_requirements</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;Return the requirements as a list of string.&quot;&quot;&quot;</span>
+<span class="n">requirements_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="n">filename</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">requirements_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="c1"># ...</span>
+
+<span class="n">REQUIRES</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">_get_requirements</span><span class="p">(</span><span class="s1">&#39;requirements.txt&#39;</span><span class="p">)</span>
+<span class="n">REQUIRES_DEV</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">_get_requirements</span><span class="p">(</span><span class="s1">&#39;requirements-dev.txt&#39;</span><span class="p">)</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="c1"># ...</span>
+
+    <span class="n">extras_require</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dev&quot;</span><span class="p">:</span> <span class="n">REQUIRES_DEV</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+<p>On peut maintenant installer notre package comme avant, ce qui installera aussi ses dependances,
+mais on peut également l'installer avec ses dépendances de développement, pour cela rien de plus
+simple, on utilise la commande suivante.</p>
+<div class="highlight"><pre><span></span><span class="c1"># installation dev mode with dev dependencies</span>
+pip install -e .<span class="o">[</span>dev<span class="o">]</span>
+</pre></div>
+<p>Vérifions que notre package est bien installé en utilisant une console python.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">simple_package</span> <span class="kn">import</span> <span class="n">str_to_datetime</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">str_to_datetime</span><span class="p">(</span><span class="s1">&#39;2019-01-01&#39;</span><span class="p">)</span>
+<span class="c1"># datetime.datetime(2019, 1, 1, 0, 0, tzinfo=tzutc())</span>
+</pre></div>
+<p>Et voilà on maîtrise maintenant la création du paquet python avec une gestion de ses dépendances
+grâce au <span class="red">setup.py</span>. Nous allons voir dans la suite de ce post un autre atout que peut nous
+apporter notre script de packaging à savoir la mise en place de commandes qui seront directement
+accessibles depuis votre terminal.</p>
+<p>Comme toujours le code de cette partie est disponible ici
+<a class="reference external" href="https://github.com/MarcAureleCoste/packages/tree/step-02">step-02</a>.</p>
+</div>
+<div class="section" id="ajouter-une-commande">
+<h2>Ajouter une commande</h2>
+<p>Nous avons déjà une super librairie qu'on peut installer facilement avec une
+gestion des dépendances mais on va voir que packager notre application peut
+également nous permettre de créer des outils directement accessibles en ligne de
+commande.</p>
+<p>On va modifier notre fichier <span class="red">setup.py</span> pour lui ajouter ce que l'on
+appelle les <strong>entry_points</strong></p>
+<div class="highlight"><pre><span></span><span class="c1"># setup.py</span>
+<span class="c1"># ...</span>
+<span class="n">setup</span><span class="p">(</span>
+    <span class="c1"># ...</span>
+
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;console_scripts&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;now=simple_package.dates:now&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;hour+1=simple_package.dates:plus_hour&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;hour-1=simple_package.dates:minus_hour&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+<p>Pour expliquer simplement, les <strong>entry_points</strong> sont les fonctions de notre paquet python que nous
+voulons appeler depuis la console lorsque celui-ci est installé. Les entrées se composent de la
+manière suivante:</p>
+<p><tt class="docutils literal"><span class="pre">&lt;command_name&gt;=&lt;package&gt;.&lt;module&gt;:&lt;function&gt;</span></tt></p>
+<p>Nous ajoutons donc ici trois nouvelles commandes (now, hour+1, hour-1) qui vont appeler les fonctions
+now, plus_hour, minus_hour qui se trouvent dans le package simple_package, dans le module date;
+là où nous avons défini notre fonction str_to_datetime.</p>
+<p>Ajoutons donc ces trois nouvelles fonctions</p>
+<div class="highlight"><pre><span></span><span class="c1"># dates.py</span>
+<span class="c1"># ...</span>
+
+<span class="k">def</span> <span class="nf">now</span><span class="p">():</span>
+<span class="k">return</span> <span class="n">arrow</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">plus_hour</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">arrow</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">minus_hour</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">arrow</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">hours</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+<p>On peut maintenant lancer ces fonctions directement depuis notre shell.</p>
+<p>Les sources c'est ici <a class="reference external" href="https://github.com/MarcAureleCoste/packages/tree/step-03">step-03</a>.</p>
+</div>
+<div class="section" id="uploader-notre-package-sur-pypi">
+<h2>Uploader notre package sur PyPi</h2>
+<p>La dernière étape de cet article est la mise à disposition de notre package via le repository officiel
+<a class="reference external" href="https://pypi.org/">PyPi</a>. Il existe également un <a class="reference external" href="https://test.pypi.org/">PyPi de test</a> pour vérifier que tout se
+passe bien lorsque l'on essay de mettre notre package en ligne. Dans les deux cas il vous faudra un compte si vous n'en
+avait pas déjà un.</p>
+<p>Pour nous aider nous allons utiliser l'utilitaire <strong>twine</strong>.</p>
+<div class="highlight"><pre><span></span>pip install twine
+</pre></div>
+<p>Maintenant on va build notre <strong>distribution package</strong>. C'est le résultat de cette opération
+qui sera ensuite mis sur PyPi. On lance donc la commande suivante:</p>
+<div class="highlight"><pre><span></span>python setup.py sdist bdist_wheel
+</pre></div>
+<p>Nous somme prets a uploader tout ca et on va commencer par faire un test sur le PyPi prévu à cet effet.</p>
+<div class="highlight"><pre><span></span>twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+</pre></div>
+<p>Et voilà notre paquet est maintenant disponible, enfin presque. On peut quand se rendre sur le <a class="reference external" href="https://test.pypi.org/">PyPi de test</a> pour voir
+si notre paquet est bien disponible. Normalement on devrait voir une page qui ressemble à ça :</p>
+<img alt="pypi no description" class="responsive-images align-center" src="/static/images/python_packages/no_description.png" />
+<p>Notre paquet est là c'est une bonne chose mais on remarque vite qu'il y a un problème, aucune description n'est présente
+bien que dans notre <span class="red">setup.py</span> on ait bien défini la <strong>description</strong>. En réalité pour voir apparaitre cette fameuse
+description il faut définir la <strong>long_description</strong>.</p>
+<p>Nous avons vu plus haut que le fichier <span class="red">setup.py</span> est un fichier python comme les autres, nous allons une nouvelle
+fois utiliser cet avantage pour avoir rapidement cette fameuse <strong>long_description</strong>.</p>
+<p>En effet si vous avez plusieurs projets sur GitHub vous avez probablement créer des README.md afin d'expliquer aux
+personnes qui arrivent sur votre repository en quoi consiste votre projet. Nous allons utiliser ce fichier README comme
+<strong>long_description</strong>, pour cela on fait les modifications suivantes.</p>
+<div class="highlight"><pre><span></span><span class="c1"># setup.py</span>
+<span class="c1"># ...</span>
+
+<span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simply return the content of a file.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+
+<span class="c1"># ...</span>
+<span class="n">VERSION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0.1.1&quot;</span>
+<span class="c1"># ...</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="c1"># ...</span>
+    <span class="n">long_description</span><span class="o">=</span><span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;README.md&#39;</span><span class="p">)),</span>
+    <span class="n">long_description_content_type</span><span class="o">=</span><span class="s1">&#39;text/markdown&#39;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>Nous savons maintenant créer des paquets python mais nous avons surtout compris en quoi leur création nous simplifie la
+vie. Maintenant lorsque vous commencerez un développement en python j'espère que vous ferez le meilleur usage possible
+du setup.</p>
+</div>
+
+    </div><!-- /.entry-content -->
+</article>
+
+
+
+        </div>
+    </main>
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <!-- <span class="text-muted">Place sticky footer content here.</span> -->
+            <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of
+                <a href="http://python.org">Python</a>.
+            </address>
+        </div>
+    </footer>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- JQuery -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script> -->
+    <!-- Foundation JS -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script> -->
+    <!-- <script>
+        $(document).foundation();
+    </script> -->
+</body>
+</html>

@@ -57,9 +57,6 @@
                 <ul class="navbar-nav mr-auto">
                     
 
-                            <li class="nav-item" >
-                                <a class="nav-link" href="/pages/about.html">A propos</a>
-                            </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
@@ -109,11 +106,16 @@
     </footer><!-- /.post-info -->
 
     <div class="entry-content">
-        <p>Notre API de Todo(s) fonctionne bien. En plus de pouvoir <em>lister</em>, <em>créer</em>, <em>modifier</em>, <em>supprimer</em> des éléments de notre base de données elle nous permet également de filtrer les résultats selon divers paramètres (e.g. le titre, la description, ...).</p>
-<p>Mais un fondamental est manquant, la gestion des utilisateurs, sauf si bien sûr vous faites une API ouverte avec de la donnée libre d'accès. Cette gestion permettra surtout de faire l'association entre une donnée et son <em>propriétaire</em>.</p>
+        <p>Notre API de Todo(s) fonctionne bien. En plus de pouvoir <em>lister</em>, <em>créer</em>, <em>modifier</em>, <em>supprimer</em> des éléments de
+notre base de données elle nous permet également de filtrer les résultats selon divers paramètres (e.g. le titre, la
+description, ...).</p>
+<p>Mais un fondamental est manquant, la gestion des utilisateurs, sauf si bien sûr vous faites une API ouverte avec de la
+donnée libre d'accès. Cette gestion permettra surtout de faire l'association entre une donnée et son <em>propriétaire</em>.</p>
 <div class="section" id="settings">
 <h2>Settings</h2>
-<p>On commence par changer nos settings. On ajoute l'application &quot;rest_framework.authtoken&quot; qui permettra l'authentification via un token (ce sera utile en production) et dans les settings de DRF nous ajoutons une restriction : <strong>les utilisateurs doivent être authentifiés pour pouvoir utiliser notre API</strong>.</p>
+<p>On commence par changer nos settings. On ajoute l'application &quot;rest_framework.authtoken&quot; qui permettra
+l'authentification via un token (ce sera utile en production) et dans les settings de DRF nous ajoutons une
+restriction : <strong>les utilisateurs doivent être authentifiés pour pouvoir utiliser notre API</strong>.</p>
 <div class="highlight"><pre><span></span><span class="c1"># common.py</span>
 <span class="o">...</span>
 <span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
@@ -132,7 +134,8 @@
     <span class="o">...</span>
 <span class="p">}</span>
 </pre></div>
-<p>Dans le fichier de settings pour le développement nous ajoutons ceci pour autoriser l'utilisation de la 'basic authentication'. Cela simplifiera nos tests.</p>
+<p>Dans le fichier de settings pour le développement nous ajoutons ceci pour autoriser l'utilisation de la
+'basic authentication'. Cela simplifiera nos tests.</p>
 <div class="highlight"><pre><span></span><span class="c1"># development.py</span>
 <span class="o">...</span>
 <span class="c1"># REST Framework</span>
@@ -144,7 +147,10 @@
 </div>
 <div class="section" id="creation-du-modele-todouser">
 <h2>Création du modèle TodoUser</h2>
-<p>Nous allons créer un utilisateur pour notre application. Django fournit un modèle User de base mais nous allons wrapper ce modèle avec notre propre classe et en utilisant une liaison <strong>OneToOne</strong>. On peut voir cet &quot;utilisateur&quot; plus comme un profile. Cela nous offrira également plus de flexibilité si nous voulons ajouter des informations à notre utilisateur dans le futur.</p>
+<p>Nous allons créer un utilisateur pour notre application. Django fournit un modèle User de base mais nous allons wrapper
+ce modèle avec notre propre classe et en utilisant une liaison <strong>OneToOne</strong>. On peut voir cet &quot;utilisateur&quot; plus comme
+un profile. Cela nous offrira également plus de flexibilité si nous voulons ajouter des informations à notre utilisateur
+dans le futur.</p>
 <p>On va dans notre fichier <span class="red">models.py</span></p>
 <div class="highlight"><pre><span></span><span class="c1"># models.py</span>
 <span class="o">...</span>
@@ -163,7 +169,10 @@
 </div>
 <div class="section" id="creation-d-une-tache-assignation-du-proprietaire">
 <h2>Création d'une tâche: assignation du propriétaire</h2>
-<p>La création de nos tâches doit maintenant être modifiée. En plus des informations <strong>title</strong>, <strong>description</strong> et <strong>finished</strong> il nous faut maintenant définir le <strong>owner</strong>. Pour cela on va se baser sur l'utilisateur qui envoie la requête étant donnée que maintenant pour utiliser notre API il faut être authentifié. Nous allons overwrite la méthode create du serializer pour creer une tâche avec une liaison vers le user qui a envoyé la requête.</p>
+<p>La création de nos tâches doit maintenant être modifiée. En plus des informations <strong>title</strong>, <strong>description</strong> et
+<strong>finished</strong> il nous faut maintenant définir le <strong>owner</strong>. Pour cela on va se baser sur l'utilisateur qui envoie la
+requête étant donnée que maintenant pour utiliser notre API il faut être authentifié. Nous allons overwrite la méthode
+create du serializer pour creer une tâche avec une liaison vers le user qui a envoyé la requête.</p>
 <div class="highlight"><pre><span></span><span class="c1"># serializers.py</span>
 <span class="o">...</span>
 <span class="k">class</span> <span class="nc">TodoSerializer</span><span class="p">(</span><span class="n">ModelSerializer</span><span class="p">):</span>
@@ -178,7 +187,9 @@
 </div>
 <div class="section" id="filter-les-resultats">
 <h2>Filter les résultats</h2>
-<p>Tout comme la création, la récupération des résultats doit être modifiée. En effet je ne veux voir que les tâches que j'ai créé et pas celles des autres. Il faut donc filtrer les résultats qui vont être retournés. C'est dans le viewset que l'on a défini la queryset et c'est donc dans cette classe que nous allons agir pour filtrer les résultats.</p>
+<p>Tout comme la création, la récupération des résultats doit être modifiée. En effet je ne veux voir que les tâches que
+j'ai créé et pas celles des autres. Il faut donc filtrer les résultats qui vont être retournés. C'est dans le viewset
+que l'on a défini la queryset et c'est donc dans cette classe que nous allons agir pour filtrer les résultats.</p>
 <div class="highlight"><pre><span></span><span class="c1"># views.py</span>
 <span class="o">...</span>
 <span class="k">class</span> <span class="nc">TodoViewset</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
