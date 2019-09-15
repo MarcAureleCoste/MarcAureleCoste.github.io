@@ -5,7 +5,8 @@ Un blog mais aussi et surtout un memo sur le langage Python mais aussi l'IT de f
 ## Running pelican on localhost
 
 ```sh
-pelican --listen
+pelican content (-r)  # Build the articles
+pelican --listen  # Start pelican web server
 ```
 
 ## Update content

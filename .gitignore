@@ -4,5 +4,11 @@ output
 # Python cache
 __pycache__
 
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+
 # VSCode settings
 .vscode

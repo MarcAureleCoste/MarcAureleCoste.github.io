@@ -124,7 +124,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h3, h4, h5, h6 { margin-top: .8em; }
-    
+div.section h2 {
+    border-bottom: 1px solid black;
+}
+
 hr { border: 2px solid #EEEEEE; }
 
 /* Anchors */
@@ -161,7 +164,7 @@ ol {
 li { margin-top: 0.5em;}
 
 .post-info {
-    border-top: 1px solid;
+    border-top: 3px solid;
     text-align: right;
 }
 
@@ -191,7 +194,7 @@ q {}
 
 /* Tables */
 table {margin: .5em auto 1.5em auto; width: 98%;}
-    
+
     /* Thead */
     thead th {padding: .5em .4em; text-align: left;}
     thead td {}
@@ -199,14 +202,14 @@ table {margin: .5em auto 1.5em auto; width: 98%;}
     /* Tbody */
     tbody td {padding: .5em .4em;}
     tbody th {}
-    
+
     tbody .alt td {}
     tbody .alt th {}
-    
+
     /* Tfoot */
     tfoot th {}
     tfoot td {}
-    
+
 /* HTML5 tags */
 /* header, section, footer,
 aside, nav, article, figure {

@@ -4,6 +4,7 @@ A propos
 :template: about
 :slug: about
 :lang: fr
+:status: draft
 
 .. _PyPy: https://pypy.org/
 .. _Stackless: https://github.com/stackless-dev/stackless/wiki
