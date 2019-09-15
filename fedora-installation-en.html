@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-            <title>Cyclopy - Faire une installation minimal de Fedora avec X</title>
+            <title>Cyclopy - Minimal installation of Fedora with X</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -33,6 +33,8 @@
 
 
 
+
+            <link rel="alternate" hreflang="fr" href="/fedora-installation.html">
 
 
 
@@ -79,12 +81,14 @@
 <article class="hentry">
     <header>
         <h2 class="entry-title">
-            <a href="/fedora-installation.html" rel="bookmark" title="Permalink to Faire une installation minimal de Fedora avec X">
-                Faire une installation minimal de Fedora avec X
+            <a href="/fedora-installation-en.html" rel="bookmark" title="Permalink to Minimal installation of Fedora with X">
+                Minimal installation of Fedora with X
             </a>
         </h2>
 
-        
+        Translations:
+<a href="/fedora-installation.html" hreflang="fr">fr</a>
+
     </header>
 
     <footer class="post-info">
@@ -92,8 +96,8 @@
             Tue 12 February 2019
         </time>
 
-        <time class="modified" datetime="2019-09-15T20:35:00+02:00">
-            Sun 15 September 2019
+        <time class="modified" datetime="2019-02-12T20:35:00+01:00">
+            Tue 12 February 2019
         </time>
 
         <div class="category">
@@ -109,15 +113,18 @@
     </footer><!-- /.post-info -->
 
     <div class="entry-content">
-        <p>Dans cet article je vais détailler les étapes pour faire une installation minimale qui permet de booter et lancer une session X avec un window manager (ici QTile).
-C'est un exercice assez simple, surtout avec Fedora qui dispose d'un installateur graphique facile à prendre en main.</p>
-<p>Dans un deuxième temps on passera rapidement sur les quelques fichiers / configurations à faire pour avoir un système fonctionnel.</p>
-<div class="section" id="media-bootable">
-<h2>Média bootable</h2>
-<p>On télécharge l'ISO que l'on prendra en version <em>netinstall</em>. Pour la création d'une clé USB bootable on utilise la commande suivante</p>
+        <p>In this post I will detail the steps for a minimal installation that allow you to boot and start an X session with a
+simple window manager (I choose QTile). This is a simple excercice because Fedora has a very good graphical installer
+realy easy to use.</p>
+<p>In a second time we will quickly move on the few files and configurations to have a more functional system.</p>
+<div class="section" id="bootable-media">
+<h2>Bootable media</h2>
+<p>The first things to do is to download the ISO of Fedora (netinstall version) and to create the bootable USB we can use
+the following command with elevated privileges (sudo or as root user):</p>
 <div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>path/to/iso <span class="nv">of</span><span class="o">=</span>/path/to/device.
 </pre></div>
-<p>Il existe également des outils dédiés pour faire la même chose avec une interface graphique.</p>
+<p>If you don't want to use dd, cannot use dd because you are on Windows, or want a graphical interface, you can use the
+following:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -133,19 +140,26 @@ C'est un exercice assez simple, surtout avec Fedora qui dispose d'un installateu
 </div>
 <div class="section" id="installation">
 <h2>Installation</h2>
-<p>Bon ici, rien de compliqué. On boot sur la clé et on suit les étapes.</p>
+<p>Here nothing complicated. We boot on the key and we follow the steps.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">On est sur une version <em>netinstall</em> donc il nous faut une connexion internet Wi-Fi ou filaire.</p>
+<p class="last">We are using a <em>netinstall</em> version so we need an internet connection (Wi-Fi or wired).</p>
 </div>
 <img alt="choose language screen" class="responsive-images align-center" src="/static/images/fedora_installation/choose_language.png" />
-<p>On choisit la langue, par défaut je me mets toujours en anglais mais après c'est une question de préférence. Ne pas oublier de choisir son clavier (en haut à droite).</p>
-<p>Ici on arrive sur le menu principal de l'installation.</p>
+<p>We choose the lang, I choose english by default, but use your prefered language and we will also set the keyboard
+layout.</p>
+<p>We now arrive to the main menu of the installer.</p>
 <img alt="main screen" class="responsive-images align-center" src="/static/images/fedora_installation/main.png" />
-<p>On choisit où on veut installer la distribution (Installation Destination)</p>
+<p>Important thing to do : choose where we want to install our distribution (Installation Destination). For the partitions
+you can let the system do that for you.</p>
 <img alt="select installation destination screen" class="responsive-images align-center" src="/static/images/fedora_installation/select_drive.png" />
-<p>Pour finir on choisit le type d'installation (Sofware Selection). Ici on prend la <em>minimal install</em> et c'est tout.</p>
+<p>And the second thing to do is to select the installation type in the <strong>Sofware Selection</strong> entry. Of course we select
+the <em>minimal install</em> and that's it.</p>
 <img alt="select software screen" class="responsive-images align-center" src="/static/images/fedora_installation/software_selection.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Pour les personnes qui sont en Wi-Fi je conseille aussi de choisir FIXME sinon vous risquez d'avoir des problèmes pour la suite car les drivers ne seront probablement pas installés et le support du Wi-Fi pour <strong>NetworkManager</strong> ne sera pas présent.</p>
+</div>
 <p>On peut maintenant lancer le processus d'installation avec le bouton <em>begin installation</em> qui devrait être disponible.</p>
 <div class="section" id="installation-en-wi-fi">
 <h3>Installation en Wi-Fi</h3>
