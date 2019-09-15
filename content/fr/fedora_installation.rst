@@ -2,7 +2,7 @@ Faire une installation minimal de Fedora avec X
 ###############################################
 
 :date: 2019-02-12 20:35
-:modified: 2019-02-12 20:35
+:modified: 2019-09-15 20:35
 :tags: Fedora, Installation, Configuration
 :category: Linux
 :slug: fedora-installation
@@ -16,11 +16,11 @@ Faire une installation minimal de Fedora avec X
 
 
 Dans cet article je vais détailler les étapes pour faire une installation minimale qui permet de booter et lancer une session X avec un window manager (ici QTile).
-C'est un exercice assez simple, surtout avec Fedora qui dispose d'un installateur graphique facile à prendre en main. 
+C'est un exercice assez simple, surtout avec Fedora qui dispose d'un installateur graphique facile à prendre en main.
 
 Dans un deuxième temps on passera rapidement sur les quelques fichiers / configurations à faire pour avoir un système fonctionnel.
 
-Media bootable
+Média bootable
 ==============
 
 On télécharge l'ISO que l'on prendra en version *netinstall*. Pour la création d'une clé USB bootable on utilise la commande suivante
@@ -72,8 +72,6 @@ Pour finir on choisit le type d'installation (Sofware Selection). Ici on prend l
     :alt: select software screen
     :align: center
     :class: responsive-images
-
-.. note:: Pour les personnes qui sont en Wi-Fi je conseille aussi de choisir FIXME sinon vous risquez d'avoir des problèmes pour la suite car les drivers ne seront probablement pas installés et le support du Wi-Fi pour **NetworkManager** ne sera pas présent.
 
 On peut maintenant lancer le processus d'installation avec le bouton *begin installation* qui devrait être disponible.
 
